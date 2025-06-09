@@ -8,7 +8,7 @@ import uuid
 # Constants
 CHAT_FILE = "chat.json"
 RESERVED_NAMES = ["PQ:ADMIN"]
-ADMIN_PASSWORD = "pranav1875"  # 👈 Change this to your secret admin password
+ADMIN_PASSWORD = "letmein123"  # 👈 Change this to your own secret password
 
 # Initialize chat file if not exists
 if not os.path.exists(CHAT_FILE):
@@ -32,25 +32,36 @@ def save_message(username, message):
     with open(CHAT_FILE, "w") as f:
         json.dump(messages, f)
 
+# Delete a message
+def delete_message(msg_id):
+    messages = load_messages()
+    if msg_id in messages:
+        del messages[msg_id]
+        with open(CHAT_FILE, "w") as f:
+            json.dump(messages, f)
+
 # Streamlit UI
 st.set_page_config("Local Chat Room")
 st.title("💬 Local Chat Room")
 
-# User inputs
+# User input
 username = st.text_input("Your name", max_chars=20)
 message = st.text_input("Enter your message", max_chars=200)
 
-# Admin password field (only if trying to use PQ:ADMIN)
+# Admin password (only needed if using reserved name)
 admin_password = ""
+is_admin = False
 if username.strip().upper() == "PQ:ADMIN":
     admin_password = st.text_input("Admin Password", type="password")
+    if admin_password == ADMIN_PASSWORD:
+        is_admin = True
 
-# Send button logic
+# Send message logic
 if st.button("Send"):
     if not username or not message:
         st.warning("Please enter both name and message.")
     elif username.strip().upper() in [name.upper() for name in RESERVED_NAMES]:
-        if admin_password != ADMIN_PASSWORD:
+        if not is_admin:
             st.error("Username 'PQ:ADMIN' is reserved. Invalid password.")
         else:
             save_message(username, message)
@@ -61,19 +72,26 @@ if st.button("Send"):
 
 # Load and sort messages
 messages = load_messages()
-sorted_msgs = sorted(messages.values(), key=lambda x: x["timestamp"])
+sorted_msgs = sorted(messages.items(), key=lambda x: x[1]["timestamp"])
 
 # Display chat
 st.subheader("📜 Chat History")
-for msg in sorted_msgs:
+for msg_id, msg in sorted_msgs:
     timestamp = datetime.fromtimestamp(msg["timestamp"]).strftime("%H:%M:%S")
     user = msg["user"]
     text = msg["message"]
 
-    if user.strip().upper() == "PQ:ADMIN":
-        st.markdown(
-            f"<span style='color:red; font-weight:bold;'>[{timestamp}] {user}: {text}</span>",
-            unsafe_allow_html=True
-        )
-    else:
-        st.markdown(f"**[{timestamp}] {user}**: {text}")
+    col1, col2 = st.columns([10, 1])
+    with col1:
+        if user.strip().upper() == "PQ:ADMIN":
+            st.markdown(
+                f"<span style='color:red; font-weight:bold;'>[{timestamp}] {user}: {text}</span>",
+                unsafe_allow_html=True
+            )
+        else:
+            st.markdown(f"**[{timestamp}] {user}**: {text}")
+    with col2:
+        if is_admin:
+            if st.button("🗑️", key=msg_id):
+                delete_message(msg_id)
+                st.rerun()
