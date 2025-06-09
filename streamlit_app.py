@@ -50,4 +50,4 @@ for msg in sorted_msgs:
     st.markdown(f"**[{timestamp}] {msg['user']}**: {msg['message']}")
 
 # Auto-refresh every 5 seconds
-st.experimental_rerun()
+st.rerun()
