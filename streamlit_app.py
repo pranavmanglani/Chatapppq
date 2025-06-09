@@ -30,8 +30,8 @@ def save_message(username, message):
         json.dump(messages, f)
 
 # UI
-st.set_page_config("Local Chat Room")
-st.title("💬 Local Chat Room")
+st.set_page_config("PQ Chatting")
+st.title("PQ Chatting")
 
 username = st.text_input("Your name", max_chars=20)
 message = st.text_input("Enter your message", max_chars=200)
