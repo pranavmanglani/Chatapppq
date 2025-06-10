@@ -62,7 +62,7 @@ if st.button("Send"):
         st.warning("Please enter both name and message.")
     elif username.strip().upper() in [name.upper() for name in RESERVED_NAMES]:
         if not is_admin:
-            st.error("Username 'PQ:ADMIN' is reserved. Invalid password.")
+            st.error("Username 'PQ:ADMIN,PQ,pq is reserved. Invalid password.")
         else:
             save_message(username, message)
             st.rerun()
