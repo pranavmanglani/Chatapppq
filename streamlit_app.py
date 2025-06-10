@@ -8,7 +8,7 @@ import uuid
 # Constants
 CHAT_FILE = "chat.json"
 RESERVED_NAMES = ["PQ:ADMIN","PQ","pq"]
-ADMIN_PASSWORD = "pranav1875"  # 👈 Change this to your own secret password
+ADMIN_PASSWORD = "pranav1875"
 
 # Initialize chat file if not exists
 if not os.path.exists(CHAT_FILE):
