@@ -42,7 +42,7 @@ def delete_message(msg_id):
 
 # Streamlit UI
 st.set_page_config("Local Chat Room")
-st.title("💬 Local Chat Room")
+st.title("💬 CMS Local Chat Room")
 
 # User input
 username = st.text_input("Your name", max_chars=20)
