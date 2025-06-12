@@ -52,11 +52,13 @@ if page == "Rules":
     st.subheader("📜 Chat Rules")
     st.markdown("""
     1. **Respect Others**: Be kind and respectful in your messages.
+
     2. **No Spam**: Avoid sending irrelevant or excessive messages.
 
     3. **Report Issues**: If you face any issues, contact an admin.
 
     4. **Admins Have the Final Say**: Admins can remove inappropriate content.
+    5. Saying PQ without a verified 7q student will result in ban of 3 days
 
 Abusive language is allowed to an extent and roasting others is allowed 
     """)
