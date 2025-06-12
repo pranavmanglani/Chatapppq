@@ -62,8 +62,9 @@ if page == "Rules":
 
 Abusive language is allowed to an extent and roasting others is allowed 
 
-Created by Pranav Manglani 8th C
-if u want the code dm
+Creted by student of 8th C.
+
+if u want the code dm PQ:ADMIN
     """)
 
 else:
