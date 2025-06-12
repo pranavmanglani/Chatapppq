@@ -61,6 +61,9 @@ if page == "Rules":
     5. Saying PQ without a verified 7q student will result in ban of 3 days
 
 Abusive language is allowed to an extent and roasting others is allowed 
+
+Created by Pranav Manglani 8th C
+if u want the code dm
     """)
 
 else:
