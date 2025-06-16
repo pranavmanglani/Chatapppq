@@ -44,6 +44,7 @@ def delete_message(msg_id):
 # Streamlit UI
 st.set_page_config("Local Chat Room")
 st.title("💬 CMS Local Chat Room")
+st.text('''https://youtu.be/G8A-sRPsHxw?feature=shared''')
 
 # Sidebar for navigation
 page = st.sidebar.radio("Select a Page", ["Chat Room", "Rules"])
